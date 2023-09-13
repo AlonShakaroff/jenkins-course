@@ -11,21 +11,23 @@ pipeline {
 
         stage('Testing') {
             echo 'Running tests...'
-            parallel(
-                stage('Test Add') {
-                    steps {
-                        echo 'Testing add...'
-                        sh 'pytest test_add.py'
+            steps {
+                parallel(
+                    stage('Test Add') {
+                        steps {
+                            echo 'Testing add...'
+                            sh 'pytest test_add.py'
+                        }
                     }
-                }
-                
-                stage('Test Subtract'){
-                    steps {
-                        echo 'Testing subtract...'
-                        sh 'pytest test_subtract.py'
+
+                    stage('Test Subtract'){
+                        steps {
+                            echo 'Testing subtract...'
+                            sh 'pytest test_subtract.py'
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }
