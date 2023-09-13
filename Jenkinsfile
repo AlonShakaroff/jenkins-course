@@ -2,17 +2,26 @@ pipeline {
     agent any
 
     stages {
-        stage('install dependencies') {
+        stage('Consuming dependencies') {
             steps {
                 echo 'Installing dependencies...'
                 sh 'pip3 install -r requirements.txt'
             }
         }
 
-        stage('Test') {
+        stage('Testing') {
             steps {
-                echo 'Testing....'
-                sh 'pytest test_add.py'
+                echo 'Running tests...'
+                parallel(
+                    "test_add": {
+                        echo 'Testing add...'
+                        sh 'pytest test_add.py'
+                    },
+                    "test_subtract": {
+                        echo 'Testing subtract...'
+                        sh 'pytest test_subtract.py'
+                    }
+                )
             }
         }
     }
