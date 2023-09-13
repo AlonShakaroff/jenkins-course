@@ -11,7 +11,7 @@ pipeline {
 
         stage('Testing') {
             echo 'Running tests...'
-            parallel(
+            parallel {
                 stage('Test Add') {
                     steps {
                         echo 'Testing add...'
@@ -25,7 +25,7 @@ pipeline {
                         sh 'pytest test_subtract.py'
                     }
                 }
-            )
+            }
         }
     }
 }
