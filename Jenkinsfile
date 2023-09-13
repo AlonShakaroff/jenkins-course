@@ -10,7 +10,6 @@ pipeline {
         }
 
         stage('Testing') {
-            echo 'Running tests...'
             parallel {
                 stage('Test Add') {
                     steps {
